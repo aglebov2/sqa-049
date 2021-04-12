@@ -1,46 +1,48 @@
 package ru.luxoft.courses.lab5;
 
-import ru.luxoft.courses.lab5.annotation.MethodLimit;
 import ru.luxoft.courses.lab5.annotation.OperationLimitATM;
 
 import java.lang.annotation.Annotation;
 
 @OperationLimitATM(limit = 3)
 public class Atm {
+    private static final String OPERATION_LIMIT_ENDS_MESSAGE = "Oper limit ends!";
     private int operLimit;
     private int currentOpers;
     private boolean operLimitToggl = true;
 
-    private Account  account = new Account(new Principal("Igor", "Ershov", "Vladimirovich", (short) 35), "login", "pass");
+    private final Account account = new Account(new Principal("Igor", "Ershov", "Vladimirovich", (short) 35), "login", "pass");
 
-    private Money rur = new Money(CurrencyHolder.getCurrencyByName("RUR"), 1000);
-    private Money usd = new Money(CurrencyHolder.getCurrencyByName("USD"), 1000);
+    private final Money rur = new Money(CurrencyHolder.getCurrencyByName("RUR"), 1000);
+    private final Money usd = new Money(CurrencyHolder.getCurrencyByName("USD"), 1000);
 
-    private CreditScore creditScore = new CreditScore(account, 222, rur);
-    private DebitScore debitScore = new DebitScore(account, 223, usd);
-    {
-        account.addScore(creditScore);
-        account.addScore(debitScore);
-    }
+    private final CreditScore creditScore = new CreditScore(account, 222, rur);
+    private final DebitScore debitScore = new DebitScore(account, 223, usd);
 
     public Atm(int operLimit, int currentOpers) {
+        account.addScore(creditScore);
+        account.addScore(debitScore);
         this.operLimit = operLimit;
         this.currentOpers = currentOpers;
-        Class thisClass = this.getClass();
-        for (Annotation annotation:
+        Class<?> thisClass = this.getClass();
+        for (Annotation annotation :
                 thisClass.getAnnotations()) {
-            if(annotation instanceof OperationLimitATM){
-                this.operLimit = ((OperationLimitATM)annotation).limit();
+            if (annotation instanceof OperationLimitATM) {
+                this.operLimit = ((OperationLimitATM) annotation).limit();
                 this.operLimitToggl = true;
             }
         }
 
     }
 
+    public static void main(String[] args) {
+        new Atm(2, 0).run();
+
+    }
 
     private void withdrawMoneyFromDebet(Money money) {
-        if(operLimitToggl && currentOpers >= operLimit){
-            System.out.println("Oper limit ends!");
+        if (operLimitToggl && currentOpers >= operLimit) {
+            System.out.println(OPERATION_LIMIT_ENDS_MESSAGE);
             return;
         }
         currentOpers++;
@@ -48,8 +50,8 @@ public class Atm {
     }
 
     private void withdrawMoneyFromCredet(Money money) {
-        if(operLimitToggl && currentOpers >= operLimit){
-            System.out.println("Oper limit ends!");
+        if (operLimitToggl && currentOpers >= operLimit) {
+            System.out.println(OPERATION_LIMIT_ENDS_MESSAGE);
             return;
         }
         currentOpers++;
@@ -57,8 +59,8 @@ public class Atm {
     }
 
     private void addMoneyToDebet(Money money) {
-        if(operLimitToggl && currentOpers >= operLimit){
-            System.out.println("Oper limit ends!");
+        if (operLimitToggl && currentOpers >= operLimit) {
+            System.out.println(OPERATION_LIMIT_ENDS_MESSAGE);
             return;
         }
         currentOpers++;
@@ -66,17 +68,12 @@ public class Atm {
     }
 
     private void addMoneyToCredit(Money money) {
-        if(operLimitToggl && currentOpers >= operLimit){
-            System.out.println("Oper limit ends!");
+        if (operLimitToggl && currentOpers >= operLimit) {
+            System.out.println(OPERATION_LIMIT_ENDS_MESSAGE);
             return;
         }
         currentOpers++;
         creditScore.addMoney(money);
-    }
-
-    public static void main(String[] args) {
-      new Atm(2, 0).run();
-
     }
 
     public void run() {

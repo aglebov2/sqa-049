@@ -3,39 +3,38 @@ package ru.luxoft.courses.lab6;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
         String[] masOfProducts = new String[5];
-        Integer [] masOfCosts = new Integer [5];
+        Integer[] masOfCosts = new Integer[5];
         Integer[] masOfCounts = new Integer[5];
         System.out.println("Hello, The program Pokupki starts working");
 
-        Scanner sc = new Scanner (System.in);
+        Scanner sc = new Scanner(System.in);
 
         int count = 0;
         System.out.println("Enter Products, Costs and Counts or exit");
-        while(sc.hasNext() && count < 5) {
+        while (sc.hasNext() && count < 5) {
             String s = sc.nextLine();
-            if("exit".equals(s)) {
+            if ("exit".equals(s)) {
                 break;
             }
 
-            String [] parts  = s.split(" ");
-            if(parts.length != 3){
+            String[] parts = s.split(" ");
+            if (parts.length != 3) {
                 System.out.println("Wrong number of arguments! Retry!");
                 continue;
             }
 
             String productName = parts[0];
-            Integer productCost;
-            Integer productCount;
+            int productCost;
+            int productCount;
 
             try {
                 productCost = Integer.parseInt(parts[1]);
                 productCount = Integer.parseInt(parts[2]);
-            } catch (NumberFormatException ex){
+            } catch (NumberFormatException ex) {
                 System.out.println(ex.getMessage());
                 System.out.println("Retry!");
                 continue;
@@ -43,14 +42,14 @@ public class Main {
 
             boolean productAlreadyExists = false;
             for (int i = 0; i < count; i++) {
-                if(productName.equals(masOfProducts[i])){
+                if (productName.equals(masOfProducts[i])) {
                     masOfCosts[i] = productCost;
                     masOfCounts[i] += productCount;
                     productAlreadyExists = true;
                 }
             }
 
-            if(!productAlreadyExists) {
+            if (!productAlreadyExists) {
                 masOfProducts[count] = productName;
                 masOfCosts[count] = productCost;
                 masOfCounts[count] = productCount;
@@ -74,7 +73,7 @@ public class Main {
 
         long sum = 0;
         for (int i = 0; i < count; i++) {
-            sum += masOfCosts[i] * masOfCounts[i];
+            sum += (long) masOfCosts[i] * masOfCounts[i];
         }
         System.out.println("Summa stoimosti pokupok = " + sum);
 
