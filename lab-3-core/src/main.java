@@ -8,7 +8,7 @@ class Lab3 {
         System.out.println("Hello, Calculator is ok");
         while (!"q".equals(userInput)) {
             try {
-                System.out.println("Input Number1 Number2 and operacions");
+                System.out.println("Input Number1 Number2 and operations");
                 int firstNumber = scanner.nextInt();
                 int secondNumber = scanner.nextInt();
                 userInput = scanner.nextLine();
@@ -41,29 +41,31 @@ class Lab3 {
                         break;
                 }
                 System.out.println(result);
-            }
-                catch (InputMismatchException ex){
+            } catch (InputMismatchException ex) {
                 System.out.println("Wrong input data!");
                 break;
             }
         }
         System.out.println("The calculator is finished");
     }
-    private static int plus(int numberOne, int numberTwo){
+
+    private static int plus(int numberOne, int numberTwo) {
         return numberOne + numberTwo;
     }
-    private static int minus(int numberOne, int numberTwo){
+
+    private static int minus(int numberOne, int numberTwo) {
         return numberOne - numberTwo;
     }
 
-    private static int ymn(int numberOne, int numberTwo){
+    private static int ymn(int numberOne, int numberTwo) {
         return numberOne * numberTwo;
     }
 
-    private static int del(int numberOne, int numberTwo){
+    private static int del(int numberOne, int numberTwo) {
         return numberOne / numberTwo;
     }
-    private static int fact(int numberOne){
+
+    private static int fact(int numberOne) {
         int res = 1;
         for (int i = 1; i <= numberOne; i++) {
             res *= i;
