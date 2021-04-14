@@ -29,6 +29,7 @@ public class ExecProductTree {
             temp.putIfAbsent(productName, 0);
             temp.computeIfPresent(productName, (k, v) -> v + count);
         }
+
         clients.forEach((key, value) -> {
             System.out.println("buyer's name :" + key + ":");
             value.forEach((k, v) -> System.out.printf("Product's name: %s Value = %d%n", k, v));
