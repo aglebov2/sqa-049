@@ -1,6 +1,6 @@
-package ru.luxoft.courses.lab5;
+package ru.luxoft.courses.lab11;
 
-import ru.luxoft.courses.lab5.annotation.Loggable;
+import ru.luxoft.courses.lab11.annotation.Loggable;
 
 @Loggable
 public class CreditScore extends Score {

@@ -1,7 +1,7 @@
-package ru.luxoft.courses.lab5;
+package ru.luxoft.courses.lab11;
 
 public class Currency {
-    private String name;
+    private final String name;
     private float usdRate;
 
     public Currency(String name, float usdRate) {

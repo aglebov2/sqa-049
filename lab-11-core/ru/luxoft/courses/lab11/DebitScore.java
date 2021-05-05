@@ -1,6 +1,6 @@
-package ru.luxoft.courses.lab5;
+package ru.luxoft.courses.lab11;
 
-import ru.luxoft.courses.lab5.annotation.Loggable;
+import ru.luxoft.courses.lab11.annotation.Loggable;
 
 @Loggable
 public class DebitScore extends Score {
@@ -12,7 +12,7 @@ public class DebitScore extends Score {
     @Override
     protected boolean operationBlocked(double operationUsdAmount) {
         return getOwner().getScoreMap().values().stream()
-                .filter(score -> score instanceof CreditScore)
+                .filter(CreditScore.class::isInstance)
                 .anyMatch(score -> score.usdBalance() < -20000);
     }
 

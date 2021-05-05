@@ -1,13 +1,13 @@
-package ru.luxoft.courses.lab5;
+package ru.luxoft.courses.lab11;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Account {
+    private final Map<Integer, Score> scoreMap;
     private Principal principal;
     private String login;
     private String password;
-    private Map<Integer, Score> scoreMap;
 
     public Account(Principal principal, String login, String password) {
         this.principal = principal;

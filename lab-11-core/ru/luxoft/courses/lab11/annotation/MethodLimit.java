@@ -1,4 +1,4 @@
-package ru.luxoft.courses.lab5.annotation;
+package ru.luxoft.courses.lab11.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface OperationLimitATM {
+@Target(ElementType.METHOD)
+public @interface MethodLimit {
     int limit();
 }

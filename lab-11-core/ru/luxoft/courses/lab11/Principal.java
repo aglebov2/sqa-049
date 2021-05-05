@@ -1,4 +1,4 @@
-package ru.luxoft.courses.lab5;
+package ru.luxoft.courses.lab11;
 
 public class Principal {
     private String firstName;
