@@ -48,19 +48,19 @@ public abstract class Score implements MoneyInterface {
         }
     }
 
-    protected boolean isMethodAvailableByOperLimit(String methodName) {
+    protected boolean isNotMethodAvailableByOperLimit(String methodName) {
         if (methodConstraintMap.containsKey(methodName)) {
             int currentCalls = methodCallMap.get(methodName);
             int limitCalls = methodConstraintMap.get(methodName);
 
             if (currentCalls >= limitCalls) {
-                return false;
+                return true;
             }
 
             currentCalls++;
             methodCallMap.put(methodName, currentCalls);
         }
-        return true;
+        return false;
     }
 
     //end Annotation method
@@ -68,7 +68,7 @@ public abstract class Score implements MoneyInterface {
     public void addMoney(Money money) {
         logIfneeded("addMoney");
         //Annotation check
-        if (!isMethodAvailableByOperLimit("addMoney")) {
+        if (isNotMethodAvailableByOperLimit("addMoney")) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
             return;
         }
@@ -88,7 +88,7 @@ public abstract class Score implements MoneyInterface {
     public void withdrawMoney(Money money) {
         logIfneeded(WITHDRAW_MONEY_METHOD_NAME);
         //Annotation check
-        if (!isMethodAvailableByOperLimit(WITHDRAW_MONEY_METHOD_NAME)) {
+        if (isNotMethodAvailableByOperLimit(WITHDRAW_MONEY_METHOD_NAME)) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
             return;
         }
@@ -117,7 +117,7 @@ public abstract class Score implements MoneyInterface {
     public Money balance() {
         logIfneeded("balance");
         //Annotation check
-        if (!isMethodAvailableByOperLimit("balance")) {
+        if (isNotMethodAvailableByOperLimit("balance")) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
             return null;
         }
@@ -128,7 +128,7 @@ public abstract class Score implements MoneyInterface {
     private void withdrawBalance(double usdAmount) {
         logIfneeded("withdrawBalance");
         //Annotation check
-        if (!isMethodAvailableByOperLimit(WITHDRAW_MONEY_METHOD_NAME)) {
+        if (isNotMethodAvailableByOperLimit(WITHDRAW_MONEY_METHOD_NAME)) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
             return;
         }
@@ -139,7 +139,7 @@ public abstract class Score implements MoneyInterface {
     private void addBalance(double usdAmount) {
         logIfneeded("addBalance");
         //Annotation check
-        if (!isMethodAvailableByOperLimit("addBalance")) {
+        if (isNotMethodAvailableByOperLimit("addBalance")) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
             return;
         }
@@ -149,7 +149,7 @@ public abstract class Score implements MoneyInterface {
     protected Double usdBalance() {
         logIfneeded("usdBalance");
         //Annotation check
-        if (!isMethodAvailableByOperLimit("usdBalance")) {
+        if (isNotMethodAvailableByOperLimit("usdBalance")) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
 
             return null;
@@ -160,9 +160,10 @@ public abstract class Score implements MoneyInterface {
     private Float getUsdRate() {
         logIfneeded("getUsdRate");
         //Annotation check
-        if (!isMethodAvailableByOperLimit("getUsdRate")) {
+        if (isNotMethodAvailableByOperLimit("getUsdRate")) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
-            return null;
+            //to prevent NullPointerException
+            return 0f;
         }
         return this.balance.getCurrency().getUsdRate();
     }
@@ -170,7 +171,7 @@ public abstract class Score implements MoneyInterface {
     public Account getOwner() {
         logIfneeded("getOwner");
         //Annotation check
-        if (!isMethodAvailableByOperLimit("getOwner")) {
+        if (isNotMethodAvailableByOperLimit("getOwner")) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
             return null;
         }
@@ -181,7 +182,7 @@ public abstract class Score implements MoneyInterface {
     public Integer getNumber() {
         logIfneeded("getNumber");
         //Annotation check
-        if (!isMethodAvailableByOperLimit("getNumber")) {
+        if (isNotMethodAvailableByOperLimit("getNumber")) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
             return null;
         }
