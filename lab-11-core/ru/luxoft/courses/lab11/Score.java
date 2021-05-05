@@ -162,8 +162,8 @@ public abstract class Score implements MoneyInterface {
         //Annotation check
         if (isNotMethodAvailableByOperLimit("getUsdRate")) {
             System.out.println(METHOD_LIMIT_IS_OVER_MESSAGE);
-            //to prevent NullPointerException
-            return 0f;
+            //to prevent NullPointerException, Better to throw own xxException
+            return 1f;
         }
         return this.balance.getCurrency().getUsdRate();
     }
