@@ -1,5 +1,7 @@
 package ru.luxoft.courses.lab12;
 
+import java.sql.SQLException;
+
 public class Exec {
     public static void main(String[] args) {
 
@@ -19,7 +21,7 @@ public class Exec {
             dao.addProduct(product4);
             dao.addProduct(product5);
             dao.addProduct(product6);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -27,7 +29,7 @@ public class Exec {
             dao.setProduct(product1);
             dao.setProduct(product3);
             dao.setProduct(product5);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -38,7 +40,7 @@ public class Exec {
             System.out.println(dao.getProductById(4));
             System.out.println(dao.getProductById(5));
             System.out.println(dao.getProductById(6));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         try {
@@ -48,7 +50,7 @@ public class Exec {
             dao.removeProduct(4);
             dao.removeProduct(5);
             dao.removeProduct(6);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
